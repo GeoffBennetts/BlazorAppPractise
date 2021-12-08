@@ -1,0 +1,48 @@
+﻿@page "/"
+
+<PageTitle>Index</PageTitle>
+
+@*<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />*@
+
+<h2 class="bg-light border p-2">
+    First Room
+</h2>
+Room: @Room.RoomName
+<br/>
+Price: @Room.Price
+<br/>
+
+<input type="number" @bind-value="@Room.Price" @bind-value:event="oninput"/>
+<br/>
+
+<input type="checkbox" id="isRoomActive"  @bind-value="@Room.IsActive" @bind-value:event="onchange"/>
+<label for="isRoomActive">Is Active</label>
+<br/>
+Room is @isActive(Room.IsActive)
+
+
+
+
+@code{
+    Model.BlazorRoom Room = new Model.BlazorRoom()
+        {
+            Id = 1,
+            RoomName = "Villa Suite",
+            IsActive = true,
+            Price = 599
+        };
+
+    string isActive(bool isActive)
+    {
+        if(isActive)
+        {
+            return "available";
+        }
+            return "not available";
+    }
+
+}
