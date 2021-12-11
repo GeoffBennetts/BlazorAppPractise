@@ -1,0 +1,61 @@
+﻿@page "/demoHotel"
+
+<h3>DemoHotel</h3>
+<div class="border p-2 mt-2" style="background-color:azure">
+    <h2 class="text-info" style="color:black">Room List</h2>
+    <div class="row container">
+        @foreach(var room in roomList)
+        {
+            <div class="bg-light border p-2 col-5">
+                <h4 class="text-secondary">Room: @room.Id</h4>
+                @room.RoomName<br/>
+                @room.Price.ToString("c")<br/>
+                <input type="checkbox" @bind-value="room.IsActive" checked="@(room.IsActive?"checked":null)"/>&nbsp; Is Active<br/>
+                <span>This room is @(room.IsActive?"available":"not available")</span><br/>
+                @if(room.IsActive)
+                {
+                    foreach(var roomProp in room.RoomProps)
+                    {
+                        <p>@roomProp.Name - @roomProp.Value</p>
+                    }
+                }
+                <input type="button" class="btn btn-info" value="Edit"/>
+                <input type="button" class="btn btn-danger" value="Delete"/>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    List<BlazorRoom> roomList = new List<BlazorRoom>();
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        roomList.Add(new BlazorRoom()
+            {
+                Id = 1,
+                RoomName = "Villa Suite",
+                IsActive = true,
+                Price = 599,
+                RoomProps = new List<BlazorRoomProp>
+            {
+                new BlazorRoomProp{ Id = 1, Name="Sq ft", Value="100"},
+                new BlazorRoomProp{ Id = 2, Name="Occupancy", Value="3"}
+            }
+            });
+        roomList.Add(new BlazorRoom()
+            {
+                Id = 2,
+                RoomName = "Forest Suite",
+                IsActive = true,
+                Price = 1000,
+                RoomProps = new List<BlazorRoomProp>
+            {
+                new BlazorRoomProp{ Id = 1, Name="Sq ft", Value="200"},
+                new BlazorRoomProp{ Id = 2, Name="Occupancy", Value="6"}
+            }
+            });
+    }
+}
