@@ -1,0 +1,12 @@
+﻿<div class="bg-light border p-2 col-5 offset-1">
+    <h4 class="text-secondary">Amenity: @Amenities.Id</h4>
+    <p>
+        @Amenities.Name<br/>
+        @Amenities.Description<br/>
+    </p>                
+</div>
+
+@code {
+    [Parameter]
+    public BlazorHotelAmenities Amenities { get; set; }
+}
