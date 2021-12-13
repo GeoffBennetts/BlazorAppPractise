@@ -1,0 +1,24 @@
+﻿<h3>LifeCycleComponent</h3>
+
+@foreach(var item in eventType)
+{
+    @item
+    <hr/>
+}
+
+@code {
+    [Parameter]
+    public int CountValue { get; set; }
+
+    List<string> eventType = new List<string>();
+
+    protected override void OnInitialized()
+    {
+        eventType.Add("Child component OnInitialized is called");
+    }
+
+    protected override void OnParametersSet()
+    {
+        eventType.Add("Child component OnParametersSet is called");
+    }
+}
